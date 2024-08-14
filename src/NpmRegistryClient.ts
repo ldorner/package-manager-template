@@ -1,7 +1,7 @@
 import fs from "fs";
 import https from "https";
 import path from "path";
-import tar from "tar";
+import * as tar from "tar";
 
 /**
  * A client for the NPM registry API.
@@ -22,7 +22,7 @@ export class NpmRegistryClient {
         headers: {
           Accept: "application/json",
         },
-      }
+      },
     );
     const data = await resp.json();
     return data;
@@ -31,7 +31,7 @@ export class NpmRegistryClient {
   async downloadTarball(
     name: string,
     absoluteVersion: string,
-    downloadToPath: string
+    downloadToPath: string,
   ): Promise<void> {
     const url = `https://registry.npmjs.org/${name}/-/${name}-${absoluteVersion}.tgz`;
     await new Promise((resolve, reject) => {
@@ -51,7 +51,7 @@ export class NpmRegistryClient {
           fs.unlink(downloadToPath, () => {}); // Delete the file if an error occurs
           console.error(
             `Error downloading package ${name}@${absoluteVersion}:`,
-            error
+            error,
           );
           reject(error);
         });
