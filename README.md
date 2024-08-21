@@ -1,6 +1,6 @@
 # basic package manager
 
-To build: `npm  run build`
+To build: `npm run build`
 
 To test the add command: `npm run test:add -- <package>`
 
